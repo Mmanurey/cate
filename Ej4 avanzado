@@ -6,13 +6,13 @@ public class Calculadora {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Bienvenido a la calculadora");
-        System.out.println("Por favor, ingrese la operación que desea realizar:");
+        System.out.println("Por favor, ingrese la operacion que desea realizar:");
         System.out.println("1. Suma");
         System.out.println("2. Resta");
-        System.out.println("3. Multiplicación");
-        System.out.println("4. División");
+        System.out.println("3. Multiplicacion");
+        System.out.println("4. Division");
         System.out.println("5. Potencia");
-        System.out.println("6. Raíz cuadrada");
+        System.out.println("6. Raiz cuadrada");
 
         int opcion = scanner.nextInt();
 
@@ -36,15 +36,15 @@ public class Calculadora {
                 raizCuadrada();
                 break;
             default:
-                System.out.println("Opción inválida");
+                System.out.println("Opcion invalida");
         }
     }
 
     public static void suma() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el primer número:");
+        System.out.println("Ingrese el primer numero:");
         double num1 = scanner.nextDouble();
-        System.out.println("Ingrese el segundo número:");
+        System.out.println("Ingrese el segundo numero:");
         double num2 = scanner.nextDouble();
         double resultado = num1 + num2;
         System.out.println("El resultado de la suma es: " + resultado);
@@ -52,9 +52,9 @@ public class Calculadora {
 
     public static void resta() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el primer número:");
+        System.out.println("Ingrese el primer numero:");
         double num1 = scanner.nextDouble();
-        System.out.println("Ingrese el segundo número:");
+        System.out.println("Ingrese el segundo numero:");
         double num2 = scanner.nextDouble();
         double resultado = num1 - num2;
         System.out.println("El resultado de la resta es: " + resultado);
@@ -62,12 +62,12 @@ public class Calculadora {
 
     public static void multiplicacion() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el primer número:");
+        System.out.println("Ingrese el primer numero:");
         double num1 = scanner.nextDouble();
-        System.out.println("Ingrese el segundo número:");
+        System.out.println("Ingrese el segundo numero:");
         double num2 = scanner.nextDouble();
         double resultado = num1 * num2;
-        System.out.println("El resultado de la multiplicación es: " + resultado);
+        System.out.println("El resultado de la multiplicacion es: " + resultado);
     }
 
     public static void division() {
@@ -78,7 +78,7 @@ public class Calculadora {
         double divisor = scanner.nextDouble();
         if (divisor != 0) {
             double resultado = dividendo / divisor;
-            System.out.println("El resultado de la división es: " + resultado);
+            System.out.println("El resultado de la division es: " + resultado);
         } else {
             System.out.println("No se puede dividir por cero");
         }
@@ -96,13 +96,13 @@ public class Calculadora {
 
     public static void raizCuadrada() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el número:");
+        System.out.println("Ingrese el numero:");
         double numero = scanner.nextDouble();
         if (numero >= 0) {
             double resultado = Math.sqrt(numero);
-            System.out.println("El resultado de la raíz cuadrada es: " + resultado);
+            System.out.println("El resultado de la raiz cuadrada es: " + resultado);
         } else {
-            System.out.println("No se puede calcular la raíz cuadrada de un número negativo");
+            System.out.println("No se puede calcular la raiz cuadrada de un numero negativo");
         }
     }
 }
