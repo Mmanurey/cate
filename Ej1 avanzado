@@ -1,0 +1,95 @@
+import java.util.*;
+
+public class CruceRio {
+    public static void main(String[] args) {
+        // Representación de los objetos en el problema
+        final String GRANJERO = "granjero";
+        final String LOBO = "lobo";
+        final String GALLINA = "gallina";
+        final String MAIZ = "maiz";
+
+        // Inicializar el estado inicial y el estado objetivo
+        Set<String> estadoInicial = new HashSet<>(Arrays.asList(GRANJERO, LOBO, GALLINA, MAIZ));
+        Set<String> estadoObjetivo = new HashSet<>(Arrays.asList(GRANJERO));
+
+        // Resolver el problema
+        List<Set<String>> solucion = encontrarSolucion(estadoInicial, estadoObjetivo);
+        
+        // Imprimir la solución
+        if (solucion != null) {
+            for (Set<String> estado : solucion) {
+                System.out.println("Orilla izquierda: " + estado);
+            }
+        } else {
+            System.out.println("No se encontró solución.");
+        }
+    }
+
+    // Función para encontrar la solución utilizando búsqueda exhaustiva
+    public static List<Set<String>> encontrarSolucion(Set<String> estadoInicial, Set<String> estadoObjetivo) {
+        // Crear una cola para la búsqueda en anchura
+        Queue<List<Set<String>>> cola = new LinkedList<>();
+        Set<Set<String>> visitados = new HashSet<>();
+
+        // Inicializar la cola con el estado inicial
+        cola.add(new ArrayList<>(Collections.singletonList(estadoInicial)));
+
+        // Búsqueda en anchura
+        while (!cola.isEmpty()) {
+            List<Set<String>> camino = cola.poll();
+            Set<String> estadoActual = camino.get(camino.size() - 1);
+
+            // Verificar si el estado actual es el estado objetivo
+            if (estadoActual.equals(estadoObjetivo)) {
+                return camino;
+            }
+
+            // Generar posibles movimientos
+            Set<Set<String>> movimientos = generarMovimientos(estadoActual);
+
+            // Agregar los movimientos válidos a la cola
+            for (Set<String> movimiento : movimientos) {
+                if (!visitados.contains(movimiento)) {
+                    visitados.add(movimiento);
+                    List<Set<String>> nuevoCamino = new ArrayList<>(camino);
+                    nuevoCamino.add(movimiento);
+                    cola.add(nuevoCamino);
+                }
+            }
+        }
+
+        // No se encontró solución
+        return null;
+    }
+
+    // Función para generar los posibles movimientos
+    public static Set<Set<String>> generarMovimientos(Set<String> estado) {
+        Set<Set<String>> movimientos = new HashSet<>();
+        boolean granjeroEnOrillaIzquierda = estado.contains("granjero");
+
+        for (String objeto1 : estado) {
+            if (objeto1.equals("granjero")) {
+                continue; // El granjero siempre está presente
+            }
+
+            for (String objeto2 : estado) {
+                if (objeto1.equals(objeto2) || objeto2.equals("granjero")) {
+                    continue; // No se pueden llevar objetos idénticos o al granjero solo
+                }
+
+                Set<String> nuevoEstado = new HashSet<>(estado);
+                nuevoEstado.remove("granjero");
+                if (granjeroEnOrillaIzquierda) {
+                    nuevoEstado.remove(objeto1);
+                    nuevoEstado.remove(objeto2);
+                } else {
+                    nuevoEstado.add(objeto1);
+                    nuevoEstado.add(objeto2);
+                }
+                movimientos.add(nuevoEstado);
+            }
+        }
+
+        return movimientos;
+    }
+}
